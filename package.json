@@ -16,6 +16,6 @@
         "prettier": "^3.2.5"
     },
     "lint-staged": {
-        "**/*": "prettier --warning --ignore-unknown"
+        "**/*": "prettier --check --ignore-unknown"
     }
 }
