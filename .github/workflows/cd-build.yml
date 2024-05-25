@@ -39,3 +39,11 @@ jobs:
                     echo "Script execution failed"
                     exit 1
                   fi
+
+            - name: Log in to Docker Hub
+              run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          
+                  
+            - name: Push Docker image
+              run: |
+                docker push isdi/ci-cd:latest
