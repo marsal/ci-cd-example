@@ -83,7 +83,7 @@
             "*.{js, jsx,ts,tsx}": [
                 "eslint --quiet --fix"
             ],
-            "**/*": "prettier --write --ignore-uknown"
+            "**/*": "prettier --write --ignore-unknown"
         }
     ```
 
