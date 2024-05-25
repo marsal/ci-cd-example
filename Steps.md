@@ -56,28 +56,33 @@
 
 1. Instalación de la dependencia
     ```bash
-        npm install --save-dev eslint
+        npm install --save-dev eslint@8.57.0
     ```
-2. Instalación de los plugins de prettier para eslint
+2. Instalación de los plugins de prettier y typescript para eslint
     ```bash
-        npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+        npm install --save-dev eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
     ```
-3. Configurar eslint, creamos el fichero `.eslintrc` en la carpeta raíz del proyecto y añadimos esto
-    ```json
-    {
-        "extends": ["eslint:recommended", "plugin:prettier/recommended"],
-        "plugins": ["prettier"],
-        "rules": {
+3. Configurar eslint, creamos el fichero `.eslintrc.cjs` en la carpeta raíz del proyecto y añadimos esto
+    ```typescript
+    module.exports = {
+        parser: '@typescript-eslint/parser',
+        extends: [
+            'eslint:recommended',
+            'plugin:@typescript-eslint/recommended',
+            'plugin:prettier/recommended',
+        ],
+        plugins: ['@typescript-eslint', 'prettier'],
+        rules: {
             // Aquí puedes agregar o modificar reglas específicas de ESLint si lo deseas
-        }
-    }
+        },
+    };
     ```
 4. Añadir eslint a lint-staged, modificamos la sección **lint-staged** del fichero `package.json` para que ejecute eslint y prettier
     ```json
         "lint-staged": {
-            "**/*": "prettier --write --ignore-uknown",
             "*.{js, jsx,ts,tsx}": [
                 "eslint --quiet --fix"
             ],
+            "**/*": "prettier --write --ignore-uknown"
         }
     ```

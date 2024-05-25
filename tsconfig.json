@@ -23,7 +23,7 @@
         "resolveJsonModule": true,
         "baseUrl": "."
     },
-    "include": ["src", ".eslint.config.js"],
+    "include": ["src", ".eslintrc.cjs"],
     "exclude": ["node_modules", "dist"],
     "$schema": "https://json.schemastore.org/tsconfig"
 }
