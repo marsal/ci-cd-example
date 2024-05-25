@@ -1,22 +1,21 @@
 {
-  "name": "ci-cd-example",
-  "version": "1.0.0",
-  "description": "Ejemplo de una pipeline CI/CD",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "ISDI Coders",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^9.3.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "husky": "^9.0.11",
-    "prettier": "^3.2.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint . && prettier --check ."
+    "name": "ci-cd-example",
+    "version": "1.0.0",
+    "description": "Ejemplo de una pipeline CI/CD",
+    "scripts": {
+        "prepare": "husky"
+    },
+    "author": "ISDI Coders",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^9.3.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.5",
+        "prettier": "^3.2.5"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-uknown"
     }
-  }
 }
