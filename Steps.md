@@ -41,7 +41,7 @@
     coverage
     ```
 3. Añadir prettier como parte del hook de pre-commit
-    - Añadir el comando en las sección **lint-staged** del archivo `package.json`
+    - Añadir el comando en las sección **lint-staged** del archivo `package.json` (podeis ver una lista de options aplicables en: https://prettier.io/docs/en/cli#--check )
     ```json
         "lint-staged": {
             "**/*": "prettier --write --ignore-uknown"
@@ -50,4 +50,34 @@
     - Añadir el comando para ejecutar lint-staged en el fichero `.husky/pre-commit`
     ```
         npx lint-staged
+    ```
+
+### Instalar y configurar eslint
+
+1. Instalación de la dependencia
+    ```bash
+        npm install --save-dev eslint
+    ```
+2. Instalación de los plugins de prettier para eslint
+    ```bash
+        npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+    ```
+3. Configurar eslint, creamos el fichero `.eslintrc` en la carpeta raíz del proyecto y añadimos esto
+    ```json
+    {
+        "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+        "plugins": ["prettier"],
+        "rules": {
+            // Aquí puedes agregar o modificar reglas específicas de ESLint si lo deseas
+        }
+    }
+    ```
+4. Añadir eslint a lint-staged, modificamos la sección **lint-staged** del fichero `package.json` para que ejecute eslint y prettier
+    ```json
+        "lint-staged": {
+            "**/*": "prettier --write --ignore-uknown",
+            "*.{js, jsx,ts,tsx}": [
+                "eslint --quiet --fix"
+            ],
+        }
     ```
