@@ -1,1 +1,3 @@
-export function utils() {}
+export function utils() {
+    const unUsedVar;
+}
