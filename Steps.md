@@ -158,4 +158,39 @@
 ## Github Actions
 
 1. Creamos un el directorio `.github/workflows` en la raíz del proyecto
-2. Creamos el fichero ci-test.yml
+2. Creamos el fichero `ci-test.yml` y le añadimos el siguiente contenido
+
+    ```yaml
+    name: Tests CI
+
+    on:
+        pull_request:
+            branches: ['master']
+
+    jobs:
+        build:
+            runs-on: ubuntu-latest
+
+            strategy:
+                matrix:
+                    node-version: [20.x]
+
+            steps:
+                - name: Checkout code
+                uses: actions/checkout@v3
+
+                - name: Set up Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v3
+                with:
+                    node-version: ${{ matrix.node-version }}
+                    cache: 'npm'
+
+                - name: Install dependencies from package.json
+                run: npm ci
+
+                - name: runs the build script
+                run: npm run build --if-present
+
+                - name: Run tests
+                run: npm test && npm run test:cucumber
+    ```

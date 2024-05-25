@@ -1,0 +1,41 @@
+name: Build and Test
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.x'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build TypeScript code
+              run: npm run build
+
+            - name: Build Docker image
+              run: docker build --progress= plain -f build/Dockerfile -t isdi/ci-cd:latest .
+
+            - name: Run docker image
+              run: docker run -rm isdi/ci-cd:latest
+              shell: bash
+
+            - name: Check exit code
+              run: |
+                  if [ $? -eq 0 ]; then
+                    echo "Docker created successfully"
+                  else
+                    echo "Script execution failed"
+                    exit 1
+                  fi

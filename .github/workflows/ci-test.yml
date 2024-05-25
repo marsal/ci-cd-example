@@ -26,9 +26,6 @@ jobs:
                   node-version: ${{ matrix.node-version }}
                   cache: 'npm'
 
-            - name: Copy env file
-              run: cp api/.env.example api/.env
-
             - name: Install dependencies from package.json
               run: npm ci
 
