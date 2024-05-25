@@ -14,7 +14,7 @@ El objetivo de este pipeline de CI/CD es automatizar y garantizar la calidad del
         - Prettier formatea automáticamente los archivos del proyecto según las reglas especificadas en la configuración.
         - ESLint realiza un análisis estático del código para identificar posibles errores y problemas de estilo.
         - Se ejecutan pruebas unitarias y de integración para validar el funcionamiento del código.
-        - Usando GitHub Actions al abrir una PR automaticamente revisamos los test y que el código compile
+        - Usando GitHub Actions, al abrir una PR automaticamente revisamos los test y que el código compile
     - **Resultado Esperado:** Cada commit es revisado automáticamente para garantizar que cumpla con los estándares de calidad y formato antes de ser integrado en el repositorio principal.
 
 2. **Fase de Entrega (CI/CD):**
