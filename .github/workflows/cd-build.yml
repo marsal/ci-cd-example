@@ -28,7 +28,7 @@ jobs:
               run: docker build --progress=plain -f build/Dockerfile -t isdi/ci-cd:latest .
 
             - name: Run docker image
-              run: docker run -rm isdi/ci-cd:latest
+              run: docker run --rm isdi/ci-cd:latest
               shell: bash
 
             - name: Check exit code
