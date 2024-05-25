@@ -25,10 +25,10 @@ jobs:
               run: npm run build
 
             - name: Build Docker image
-              run: docker build --progress=plain -f build/Dockerfile -t isdi/ci-cd:latest .
+              run: docker build --progress=plain -f build/Dockerfile -t marsalsans/ci-cd-test:latest .
 
             - name: Run docker image
-              run: docker run --rm isdi/ci-cd:latest
+              run: docker run --rm marsalsans/ci-cd-test:latest
               shell: bash
 
             - name: Check exit code
@@ -46,4 +46,4 @@ jobs:
                   
             - name: Push Docker image
               run: |
-                docker push isdi/ci-cd:latest
+                docker push marsalsans/ci-cd-test
