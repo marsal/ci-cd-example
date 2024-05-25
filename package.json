@@ -4,6 +4,7 @@
     "description": "Ejemplo de una pipeline CI/CD",
     "scripts": {
         "prepare": "husky",
+        "build": "tsc",
         "test": "jest",
         "test:cucumber": "cucumber-js"
     },
