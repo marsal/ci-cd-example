@@ -1,29 +1,12 @@
 {
     "compilerOptions": {
-        "lib": ["ES2021"],
-        "module": "commonjs",
-        "target": "ES2021",
-        "outDir": "dist",
-        "declaration": false,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "incremental": true,
-        "strict": true,
         "esModuleInterop": true,
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "inlineSources": false,
-        "moduleResolution": "node",
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true,
-        "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
-        "baseUrl": "."
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "sourceMap": true
     },
-    "include": ["src", ".eslintrc.cjs"],
-    "exclude": ["node_modules", "dist"],
-    "$schema": "https://json.schemastore.org/tsconfig"
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts", "__tests__"]
 }

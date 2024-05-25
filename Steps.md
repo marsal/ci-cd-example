@@ -1,6 +1,6 @@
 # PASOS A SEGUIR
 
-### Instalar y configurar husky
+## Husky
 
 1. Instalación de la dependencia
 
@@ -19,7 +19,7 @@
     git commit -m "Keep calm and commit"
     ```
 
-### Instalar y configurar prettier
+## Prettier
 
 1. Instalación de la dependencia
     ```bash
@@ -52,7 +52,7 @@
         npx lint-staged
     ```
 
-### Instalar y configurar eslint
+## Eslint
 
 1. Instalación de la dependencia
     ```bash
@@ -85,4 +85,34 @@
             ],
             "**/*": "prettier --write --ignore-uknown"
         }
+    ```
+
+## Jest
+
+1. Instalación de jest y sus dependencias
+    ```bash
+        npm install --save-dev jest ts-jest @types/jest ts-node
+    ```
+2. Configuración de jest, crear el fichero `jest.config.ts` y añadir el siguiente contenido
+    ```typescript
+    module.exports = {
+        preset: 'ts-jest',
+        testEnvironment: 'node',
+        testRegex: '.*\\.spec\\.ts$',
+        moduleFileExtensions: ['ts', 'js'],
+        collectCoverage: true,
+        coverageReporters: ['html', 'text-summary'],
+    };
+    ```
+3. Añadir el script para lanzar los test en el `package.json`
+    ```json
+    {
+        "scripts": {
+            "test": "jest"
+        }
+    }
+    ```
+4. Añadir el script de test en el hook pre-commit de husky (`.husky/pre-commit`)
+    ```bash
+    npm test
     ```
