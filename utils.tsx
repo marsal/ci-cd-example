@@ -1,3 +1,3 @@
 export function utils() {
-    const unUsedVar = 'HOLA';
+    const unUsedVar = 'HOLA2';
 }
