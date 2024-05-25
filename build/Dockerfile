@@ -19,4 +19,4 @@ COPY . .
 RUN npm run build
 
 # Comando para ejecutar tu aplicación cuando se inicie el contenedor
-CMD ["node", "dist/app.js"]
+CMD ["node", "dist/test.js"]
