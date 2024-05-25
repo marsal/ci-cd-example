@@ -114,5 +114,43 @@
     ```
 4. Añadir el script de test en el hook pre-commit de husky (`.husky/pre-commit`)
     ```bash
-    npm test
+    npm run test
+    ```
+
+## Cucumber
+
+1. Instalación de cucumber y sus dependencias
+    ```bash
+        npm install --save-dev @cucumber/cucumber tsconfig-paths eslint-plugin-cucumber
+    ```
+2. Añadimos el plugin de cucumber a la config de eslint
+
+    ```
+    {
+        plugins: ["cucumber"],
+    }
+    ```
+
+3. Configuración de cucumber, crear el fichero `cucumber.js` en la raíz del proyecto y añadir el siguiente contenido
+    ```typescript
+    module.exports = {
+        default: {
+            paths: ['test/**/*.feature'],
+            requireModule: ['ts-node/register', 'tsconfig-paths/register'],
+            require: ['test/features/**/*.ts'],
+            format: ['progress'],
+        },
+    };
+    ```
+4. Añadir el script para lanzar los test de cucumber en el `package.json`
+    ```json
+    {
+        "scripts": {
+            "test:cucumber": "cucumber-js"
+        }
+    }
+    ```
+5. Añadir el script de test en el hook pre-commit de husky (`.husky/pre-commit`)
+    ```bash
+    npm run test:cucumber
     ```

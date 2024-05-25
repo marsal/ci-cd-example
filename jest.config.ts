@@ -5,5 +5,4 @@ module.exports = {
     moduleFileExtensions: ['ts', 'js'],
     collectCoverage: true,
     coverageReporters: ['html', 'text-summary'],
-    rootDir: './',
 };
