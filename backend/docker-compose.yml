@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: ci-cd-test
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - ci_cd_mysql_data:/var/lib/mysql
+
+volumes:
+  ci_cd_mysql_data:
