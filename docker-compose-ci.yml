@@ -41,13 +41,11 @@ services:
             NESTJS_PORT: 3000
             DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd:3306/ci-cd'
         image: marsalsans/ci-cd-backend:latest
-        volumes:
-            - ./build/migrate.sh:/backend/entrypoint.sh
         networks:
             - main
         working_dir: /backend
         command: npm run start
-        entrypoint: /backend/entrypoint.sh
+        entrypoint: /bin/sh -c "npx prisma migrate deploy && exec npm run start"
         healthcheck:
             test:
                 [
