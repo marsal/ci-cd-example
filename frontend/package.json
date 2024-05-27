@@ -37,7 +37,7 @@
     "vitest": "^1.6.0"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix",
-    "*.{md,json}": "prettier --write"
+    "*.{ts,js}": "eslint",
+    "*.{md,json}": "prettier"
   }
 }

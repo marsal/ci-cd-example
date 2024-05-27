@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd backend && npm run test && npm run test:cucumber
-cd ../frontend && npm  test
-npx lint-staged
+(cd backend && npm run test && npm run test:cucumber && npm run lint-staged)
+(cd frontend && npm  test && npm run lint-staged)
