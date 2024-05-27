@@ -45,7 +45,7 @@ services:
             - main
         working_dir: /backend
         command: npm run start
-        entrypoint: /bin/sh -c "npx prisma migrate reset && exec npm run start"
+        entrypoint: /bin/sh -c "npx prisma migrate reset"
         healthcheck:
             test:
                 [
@@ -53,7 +53,7 @@ services:
                     'curl',
                     '-silent',
                     '--fail',
-                    'http://localhost:3000/api/counter',
+                    'http://localhost:3000/api/',
                 ]
             timeout: 5s
             interval: 10s
