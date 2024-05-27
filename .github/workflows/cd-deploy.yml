@@ -33,10 +33,10 @@ jobs:
               run: docker compose -f docker-compose-ci.yml up -d
 
             - name: List files in container
-              run: docker exec ci-cd-frontend ls /dist
+              run: docker exec ci-cd-front ls /dist
 
             - name: Copy files from Docker container
-              run: docker cp ci-cd-frontend:./dist ./build
+              run: docker cp ci-cd-front:./dist ./build
 
             - name: Deploy to Netlify
               uses: nwtgck/actions-netlify@v1.1
