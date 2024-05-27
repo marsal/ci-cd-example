@@ -33,8 +33,6 @@ USER node
 
 WORKDIR /backend
 
-COPY --chown=1001:1001 build/scripts/migrate.sh entrypoint.sh
-
 COPY --chown=1001:1001 backend .
 # ENV vars replaced with de .env file
 ENV NODE_ENV=dev
