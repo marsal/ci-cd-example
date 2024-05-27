@@ -17,36 +17,26 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '20.x'
+            # Images frontend y backend
+            - name: Build Backend Docker image
+              run: docker build --progress=plain -f build/backend.Dockerfile -t marsalsans/ci-cd-backend:latest .
+            - name: Build Frontend Docker image
+              run: docker build --progress=plain -f build/frontend.Dockerfile -t marsalsans/ci-cd-frontend:latest .
 
-            - name: Install dependencies
-              run: npm install
-
-            - name: Run unit and integration test
-              run: npm run test && npm run test:cucumber
-
-            - name: Build TypeScript code
-              run: npm run build
-
-            - name: Build Docker image
-              run: docker build --progress=plain -f build/Dockerfile -t marsalsans/ci-cd-test:latest .
-
-            - name: Run docker image
-              run: docker run --rm marsalsans/ci-cd-test:latest
-              shell: bash
-
-            - name: Check exit code
+            - name: Launch CI environment
               run: |
-                  if [ $? -eq 0 ]; then
-                    echo "Docker created successfully"
-                  else
-                    echo "Script execution failed"
-                    exit 1
-                  fi
+                  docker compose -f docker-compose-ci.yml down
+                  docker compose -f docker-compose-ci.yml up -d
+            - name: Wait for CI environment is healthy
+              run: build/scripts/wait-for-ci.sh
 
             - name: Log in to Docker Hub
               run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          
-                  
+
             - name: Push Docker image
               run: |
-                docker push marsalsans/ci-cd-test
+                  docker push marsalsans/ci-cd-backend
+
+            - name: Push Docker image
+              run: |
+                  docker push marsalsans/ci-cd-frontend

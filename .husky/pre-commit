@@ -1,3 +1,5 @@
-npx lint-staged
-npm run test
-npm run test:cucumber
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+(cd backend && npm run test && npm run test:cucumber && npx lint-staged)
+(cd frontend && npm  test && npx lint-staged)
