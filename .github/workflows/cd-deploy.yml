@@ -20,23 +20,19 @@ jobs:
 
             - name: Log in to Docker Hub
               run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          
-                  
+
             - name: Pull Docker image
               run: |
-                docker pull marsalsans/ci-cd-test
+                  docker pull marsalsans/ci-cd-backend
 
-            - name: Run Docker container
-              run: docker run -d --name mycontainer marsalsans/ci-cd-test
-
-            - name: Copy files from Docker container
-              run: docker cp mycontainer:./dist ./build
+            - name: Pull Docker image
+              run: |
+                  docker pull marsalsans/ci-cd-frontend
 
             - name: Deploy to Netlify
-              uses: nwtgck/actions-netlify@v1.1
+              uses: netlify/actions/cli@v1
               with:
-                publish-dir: ./build
-                production-deploy: true
+                  args: deploy --prod --docker YOUR_BACKEND_IMAGE:latest YOUR_FRONTEND_IMAGE:latest
               env:
-                NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-                NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
