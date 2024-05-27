@@ -31,11 +31,11 @@ USER node
 
 
 
-WORKDIR /api
+WORKDIR /backend
 
-COPY --chown=1001:1001 build/local/backend/migrate.sh entrypoint.sh
+COPY --chown=1001:1001 build/scripts/migrate.sh entrypoint.sh
 
-COPY --chown=1001:1001 api .
+COPY --chown=1001:1001 backend .
 # ENV vars replaced with de .env file
 ENV NODE_ENV=dev
 ENV DATABASE_URL="mysql://user:password@hostdb:3306/database"
