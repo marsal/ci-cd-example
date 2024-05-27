@@ -2,5 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd backend && npm run test && npm run test:cucumber
-cd frontend && npm run
+cd ../frontend && npm  test
 npx lint-staged
