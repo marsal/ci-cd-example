@@ -4,6 +4,6 @@ import { AppController } from './app.controller';
 
 @Module({
   imports: [CounterModule],
-  exports: [AppController],
+  controllers: [AppController],
 })
 export class AppModule {}
