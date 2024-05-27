@@ -48,13 +48,14 @@ services:
         entrypoint: /bin/sh -c "npx prisma migrate reset --force && exec npm run start"
         healthcheck:
             test:
-                [
-                    'CMD',
-                    'curl',
-                    '-silent',
-                    '--fail',
-                    'http://localhost:3000/api/isAlive',
-                ]
+                - CMD-SHELL
+                - |
+                    if curl -fs http://localhost:3000/api/isAlive && \
+                      curl -fs http://localhost:3000/api/counter; then \
+                      exit 0; \
+                    else \
+                      exit 1; \
+                    fi
             timeout: 5s
             interval: 10s
             retries: 5
