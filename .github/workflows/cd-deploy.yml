@@ -33,7 +33,7 @@ jobs:
               run: docker compose -f docker-compose-ci.yml up -d
 
             - name: List files in container
-              run: docker exec ci-cd-front ls /dist
+              run: docker exec ci-cd-front ls .
 
             - name: Copy files from Docker container
               run: docker cp ci-cd-front:./dist ./build
