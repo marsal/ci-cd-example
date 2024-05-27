@@ -66,7 +66,7 @@ services:
 
     front:
         restart: unless-stopped
-        image: marsalsans/ci-cd-front:latest
+        image: marsalsans/ci-cd-frontend:latest
         container_name: ci-cd-front
         depends_on:
             api:
