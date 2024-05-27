@@ -18,5 +18,15 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true
-  }
+  },
+  "include": [
+    "src",
+    "test",
+    ".eslintrc.js",
+    "jest.config.ts",
+    "cucumber.js",
+    "prisma"
+  ],
+  "exclude": ["node_modules", "dist"],
+  "$schema": "https://json.schemastore.org/tsconfig"
 }

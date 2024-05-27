@@ -19,9 +19,11 @@
         "prettier": "^3.2.5"
     },
     "lint-staged": {
-        "*.{js, jsx,ts,tsx}": [
-            "eslint --quiet --fix"
+        "backend/**/*.{ts,js,json}": [
+            "cd backend && npm run lint-staged"
         ],
-        "**/*": "prettier --write --ignore-unknown"
+        "frontend/**/*.{ts,js,json}": [
+            "cd frontend && npm run lint-staged"
+        ]
     }
 }
