@@ -25,8 +25,12 @@ jobs:
               run: |
                   docker pull marsalsans/ci-cd-frontend
 
+            - name: Pull Docker image
+              run: |
+                  docker pull marsalsans/ci-cd-backend
+
             - name: Run Docker container
-              run: docker run -d --name mycontainer marsalsans/ci-cd-frontend
+              run: docker compose -f docker-compose-ci.yml up -d
 
             - name: List files in container
               run: docker exec mycontainer ls /dist
