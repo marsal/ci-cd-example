@@ -39,13 +39,13 @@ services:
         environment:
             NODE_ENV: dev
             NESTJS_PORT: 3000
-            DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd:3306/ci-cd'
+            DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd-db:3306/ci-cd'
         image: marsalsans/ci-cd-backend:latest
         networks:
             - main
         working_dir: /backend
         command: npm run start
-        entrypoint: /bin/sh -c "npx prisma migrate reset"
+        entrypoint: /bin/sh -c "npx prisma migrate reset --force && exec npm run start"
         healthcheck:
             test:
                 [
@@ -53,7 +53,7 @@ services:
                     'curl',
                     '-silent',
                     '--fail',
-                    'http://localhost:3000/api/',
+                    'http://localhost:3000/api/isAlive',
                 ]
             timeout: 5s
             interval: 10s
