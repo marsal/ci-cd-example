@@ -23,18 +23,20 @@ jobs:
             - name: Build Frontend Docker image
               run: docker build --progress=plain -f build/frontend.Dockerfile -t marsalsans/ci-cd-frontend:latest .
 
-
             - name: Launch CI environment
               run: |
-                docker compose -f docker-compose-ci.yml down
-                docker compose -f docker-compose-ci.yml up -d
+                  docker compose -f docker-compose-ci.yml down
+                  docker compose -f docker-compose-ci.yml up -d
             - name: Wait for CI environment is healthy
               run: build/scripts/wait-for-ci.sh
-            
+
             - name: Log in to Docker Hub
               run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          
-                  
+
             - name: Push Docker image
               run: |
-                docker push marsalsans/ci-cd-test
+                  docker push marsalsans/ci-cd-backend
+
+            - name: Push Docker image
+              run: |
+                  docker push marsalsans/ci-cd-frontend
