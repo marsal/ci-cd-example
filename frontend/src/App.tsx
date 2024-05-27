@@ -8,7 +8,7 @@ type Counter = {
   count: number;
 };
 const fetchCounter = async (): Promise<Counter> => {
-  const response = await fetch('http://localhost:5173/api/counter');
+  const response = await fetch('/api/counter');
   if (!response.ok) {
     throw new Error('La solicitud no fue exitosa');
   }
@@ -18,7 +18,7 @@ const fetchCounter = async (): Promise<Counter> => {
 };
 const fetchIncrease = async (counter: Counter): Promise<Counter> => {
   const response = await fetch(
-    `http://localhost:5173/api/counter/${counter.id}/increase`,
+    `/api/counter/${counter.id}/increase`,
   );
   if (!response.ok) {
     throw new Error('La solicitud no fue exitosa');
@@ -29,7 +29,7 @@ const fetchIncrease = async (counter: Counter): Promise<Counter> => {
 };
 const fetchDecrease = async (counter: Counter): Promise<Counter> => {
   const response = await fetch(
-    `http://localhost:5173/api/counter/${counter.id}/decrease`,
+    `/api/counter/${counter.id}/decrease`,
   );
   if (!response.ok) {
     throw new Error('La solicitud no fue exitosa');

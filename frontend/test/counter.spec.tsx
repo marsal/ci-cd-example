@@ -10,12 +10,12 @@ import App from '../src/App';
 
 describe('App', () => {
   it('Renders correctly and buttons works', async () => {
-    fetchMock.get('http://localhost:5173/api/counter', { id: 1, count: 0 });
-    fetchMock.get('http://localhost:5173/api/counter/1/increase', {
+    fetchMock.get('/api/counter', { id: 1, count: 0 });
+    fetchMock.get('/api/counter/1/increase', {
       id: 1,
       count: 1,
     });
-    fetchMock.get('http://localhost:5173/api/counter/1/decrease', {
+    fetchMock.get('/api/counter/1/decrease', {
       id: 1,
       count: -1,
     });

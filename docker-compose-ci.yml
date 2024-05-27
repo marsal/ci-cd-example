@@ -1,0 +1,78 @@
+version: "3.6"
+services:
+  mysql:
+    container_name: "ci-cd-db"
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ci-cd
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_USER: ci-cd
+      MYSQL_PASSWORD: somepass
+    healthcheck:
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdocker"]
+      timeout: 45s
+      interval: 10s
+      retries: 5
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - main
+
+  api:
+    restart: unless-stopped
+    container_name: ci-cd-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      NODE_ENV: dev
+      NESTJS_PORT: 3000
+      DATABASE_URL: "mysql://ci-cd:somepass@ci-cd:3306/ci-cd"
+    image: marsalsans/ci-cd-backend:latest
+    volumes:
+      - ./build/migrate.sh:/api/entrypoint.sh
+    networks:
+      - main
+    working_dir: /api
+    command: npm run start
+    entrypoint: /api/entrypoint.sh
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-silent",
+          "--fail",
+          "http://localhost:3000/api/counter",
+        ]
+      timeout: 5s
+      interval: 10s
+      retries: 5
+    # Usamos el extra hosts para poder hacer el curl del healthcheck
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  front:
+    restart: unless-stopped
+    image: marsalsans/cid-cd-front:latest
+    container_name: ci-cd-front
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:80"
+    networks:
+      - main
+    working_dir: /usr/share/nginx/html
+
+networks:
+  main:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
