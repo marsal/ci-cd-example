@@ -1,4 +1,4 @@
-name: Build and Test
+name: Deploy CI
 
 on:
     push:
@@ -30,7 +30,7 @@ jobs:
               run: docker run -d --name mycontainer marsalsans/ci-cd-test
 
             - name: Copy files from Docker container
-              run: docker cp mycontainer:/dist ./build
+              run: docker cp mycontainer:./dist ./build
 
             - name: Deploy to Netlify
               uses: nwtgck/actions-netlify@v1.1
