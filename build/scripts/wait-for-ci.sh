@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER=ci-cd
+CONTAINER=ci-cd-backend
 
 for i in `seq 1 60`; do
     # check if status of container is running
