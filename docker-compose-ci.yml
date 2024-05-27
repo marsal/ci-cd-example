@@ -42,12 +42,12 @@ services:
             DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd:3306/ci-cd'
         image: marsalsans/ci-cd-backend:latest
         volumes:
-            - ./build/migrate.sh:/api/entrypoint.sh
+            - ./build/migrate.sh:/backend/entrypoint.sh
         networks:
             - main
-        working_dir: /api
+        working_dir: /backend
         command: npm run start
-        entrypoint: /api/entrypoint.sh
+        entrypoint: /backend/entrypoint.sh
         healthcheck:
             test:
                 [
