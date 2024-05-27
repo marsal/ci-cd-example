@@ -26,7 +26,7 @@ jobs:
               run: (cd backend && npm ci)
 
             - name: Copy .env
-              run: cp backend/.env.exampe backend/.env
+              run: cp backend/.env.example backend/.env
 
             - name: Run Backend test
               run: (cd backend && npm run test && npm run test:cucumber)
