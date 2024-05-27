@@ -21,6 +21,9 @@ jobs:
             - name: Install dependencies
               run: npm install
 
+            - name: Run unit and integration test
+              run: npm run test && npm run test:cucumber
+
             - name: Build TypeScript code
               run: npm run build
 
