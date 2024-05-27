@@ -36,7 +36,7 @@ jobs:
               run: docker exec ci-cd-front ls .
 
             - name: Copy files from Docker container
-              run: docker cp ci-cd-front:./dist ./build
+              run: docker cp ci-cd-front:. ./build
 
             - name: Deploy to Netlify
               uses: nwtgck/actions-netlify@v1.1
