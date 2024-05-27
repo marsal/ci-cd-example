@@ -23,16 +23,19 @@ jobs:
 
             - name: Pull Docker image
               run: |
-                  docker pull marsalsans/ci-cd-backend
-
-            - name: Pull Docker image
-              run: |
                   docker pull marsalsans/ci-cd-frontend
 
+            - name: Run Docker container
+              run: docker run -d --name mycontainer marsalsans/ci-cd-frontend
+
+            - name: Copy files from Docker container
+              run: docker cp mycontainer:./dist ./build
+
             - name: Deploy to Netlify
-              uses: netlify/actions/cli@v1
+              uses: nwtgck/actions-netlify@v1.1
               with:
-                  args: deploy --prod --docker YOUR_BACKEND_IMAGE:latest YOUR_FRONTEND_IMAGE:latest
+                  publish-dir: ./build
+                  production-deploy: true
               env:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
