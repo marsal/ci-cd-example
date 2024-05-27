@@ -8,7 +8,7 @@ import {
 import fetchMock from 'fetch-mock';
 import App from '../src/App';
 
-describe('App', () => {
+describe("'App'", () => {
   it('Renders correctly and buttons works', async () => {
     fetchMock.get('http://localhost:5173/api/counter', { id: 1, count: 0 });
     fetchMock.get('http://localhost:5173/api/counter/1/increase', {
