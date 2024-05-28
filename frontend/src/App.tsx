@@ -46,7 +46,6 @@ function App() {
     };
     get();
   }, []);
-
   const increaseCounter = async () => {
     const newCounter = await fetchIncrease(counter as Counter);
     setCounter(newCounter);
@@ -65,7 +64,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React v1</h1>
       <div className="card">
         {!counter && <h3>Loading</h3>}
         {counter && (
