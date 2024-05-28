@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Server
 
 on:
     push:
@@ -11,26 +11,13 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
-            # Agrega este paso para habilitar la depuración
-            - name: Debug
-              env:
-                  CI: true
-              run: |
-                  echo "Current directory: $PWD"
-                  echo "List of files: $(ls -la)"
-                  echo "Environment variables: $(env)"
-
-            - name: SSH into server and deploy
-              uses: appleboy/ssh-action@master
+            - name: Set up SSH
+              uses: webfactory/ssh-agent@v0.5.3
               with:
-                  host: 'direct.labs.play-with-docker.com'
-                  username: 'ip172-18-0-43-cpalubol2o9000dlcm70'
-                  key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  port: '22'
-                  script: |
-                      cd ci-cd-example
-                      docker-compose -f docker-compose-deploy.yml down
-                      git pull
-                      docker-compose -f docker-compose-deploy.yml up -d
+                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            - name: SSH into server and execute commands
+              run: |
+              ssh -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedAlgorithms=+ssh-rsa -oStrictHostKeyChecking=no ip172-18-0-43-cpalubol2o9000dlcm70@direct.labs.play-with-docker.com 'cd /ruta/a/tu/proyecto && docker-compose -f docker-compose-deploy.yml down && git pull && docker-compose -f docker-compose-deploy.yml up -d'
