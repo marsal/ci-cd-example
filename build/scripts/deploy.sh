@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Archivo de registro para la salida estándar (stdout)
+LOG_FILE="/tmp/deploy.log"
+
+# Archivo de registro para la salida de error (stderr)
+ERROR_LOG_FILE="/tmp/deploy_error.log"
+
+# Redirigir la salida estándar y de error al archivo de registro
+exec > >(tee -a "$LOG_FILE") 2> >(tee -a "$ERROR_LOG_FILE" >&2)
+
 # Imprimir un mensaje para indicar que el script está comenzando
 echo "Iniciando el script deploy.sh"
 
