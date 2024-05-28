@@ -68,6 +68,9 @@ services:
         working_dir: /usr/share/nginx/html
 
     nginx:
+        build:
+            context: . # Usa el mismo contexto y Dockerfile que el servicio frontend
+            dockerfile: build/frontend.Dockerfile
         container_name: ci-cd-nginx
         restart: unless-stopped
         depends_on:
