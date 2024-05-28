@@ -2,7 +2,7 @@
 
 #### Objetivos:
 
-El objetivo de este pipeline de CI/CD es automatizar y garantizar la calidad del código en un proyecto de software desde la integración hasta el despliegue, utilizando herramientas como Husky, Prettier, ESLint y GitHub Actions. Además, se incluye Docker para facilitar la creación y despliegue de contenedores.
+El objetivo de este pipeline de CI/CD es automatizar y garantizar la calidad del código en un proyecto de software desde la integración hasta el despliegue, utilizando herramientas como Husky, Lint-staged, Prettier, ESLint y GitHub Actions. Además, se incluye Docker para facilitar la creación y despliegue de contenedores.
 
 #### Pasos del Pipeline:
 
@@ -10,7 +10,7 @@ El objetivo de este pipeline de CI/CD es automatizar y garantizar la calidad del
 
     - **Objetivo:** Asegurar que el código integrado cumpla con los estándares de calidad y formato definidos.
     - **Pasos:**
-        - Husky se configura para ejecutar automáticamente Prettier y ESLint antes de cada commit.
+        - Husky y Lint-staged se configura para ejecutar automáticamente Prettier y ESLint antes de cada commit.
         - Prettier formatea automáticamente los archivos del proyecto según las reglas especificadas en la configuración.
         - ESLint realiza un análisis estático del código para identificar posibles errores y problemas de estilo.
         - Se ejecutan pruebas unitarias y de integración para validar el funcionamiento del código.
@@ -22,9 +22,8 @@ El objetivo de este pipeline de CI/CD es automatizar y garantizar la calidad del
     - **Objetivo:** Preparar el código para su despliegue en entornos de producción.
     - **Pasos:**
         - GitHub Actions se utiliza para automatizar el proceso de construcción del código y la creación de artefactos.
-        - Se crea una imagen Docker que contiene la aplicación y sus dependencias.
+        - Se crea una imagen Docker mediante docker-compose que contiene la aplicación y sus dependencias.
         - Usando GitHub Actions se levanta la imagen Docker generada y se realizan las pruebas de sanidad
-        - La imagen Docker se etiqueta y almacena en un registro de contenedores.
     - **Resultado Esperado:** Se genera una imagen Docker lista para su despliegue en un entorno de producción.
 
 3. **Fase de Despliegue (CD):**

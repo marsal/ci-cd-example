@@ -32,7 +32,7 @@ services:
             NESTJS_PORT: 3000
             DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd-db:3306/ci-cd'
         build:
-            context: . # Asegúrate de que el Dockerfile está en la raíz del proyecto
+            context: .
             dockerfile: build/backend.Dockerfile
         networks:
             - main
@@ -57,7 +57,7 @@ services:
     front:
         restart: unless-stopped
         build:
-            context: . # Asegúrate de que el Dockerfile está en la raíz del proyecto
+            context: .
             dockerfile: build/frontend.Dockerfile
         container_name: ci-cd-frontend
         depends_on:
