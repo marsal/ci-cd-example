@@ -66,22 +66,8 @@ services:
         networks:
             - main
         working_dir: /usr/share/nginx/html
-
-    nginx:
-        build:
-            context: . # Usa el mismo contexto y Dockerfile que el servicio frontend
-            dockerfile: build/frontend.Dockerfile
-        container_name: ci-cd-nginx
-        restart: unless-stopped
-        depends_on:
-            front:
-                condition: service_started # Espera a que el servicio 'front' esté iniciado
-        ports:
-            - '127.0.0.1:8000:80'
-        networks:
-            - main
         volumes:
-            - ./build/nginx/nginx.conf:/etc/nginx/conf.d/default.conf # Mapea tu archivo nginx.conf al contenedor
+            - ./build/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 networks:
     main:
