@@ -46,7 +46,6 @@ function App() {
     };
     get();
   }, []);
-
   const increaseCounter = async () => {
     const newCounter = await fetchIncrease(counter as Counter);
     setCounter(newCounter);
