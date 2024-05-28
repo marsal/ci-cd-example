@@ -15,4 +15,8 @@ jobs:
                   host: direct.labs.play-with-docker.com
                   username: ip172-18-0-43-cpalubol2o9000dlcm70
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  script: whoami
+                  script: |
+                      cd ci-cd-example
+                      docker-compose -f docker-compose-deploy.yml down
+                      git pull
+                      docker-compose -f docker-compose-deploy.yml up -d --force-recreate
