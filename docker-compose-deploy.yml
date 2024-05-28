@@ -68,9 +68,7 @@ services:
         working_dir: /usr/share/nginx/html
 
     nginx:
-        build:
-            context: . # Usa el Dockerfile que está en la raíz del proyecto
-            dockerfile: Dockerfile.nginx # Asumiendo que tienes un Dockerfile.nginx para nginx
+        image: ci-cd-frontend
         container_name: ci-cd-nginx
         restart: unless-stopped
         depends_on:
