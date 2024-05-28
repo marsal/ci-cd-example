@@ -11,7 +11,6 @@ RUN apt-get update \
     curl \
     git \
     rsync \
-    python3 \
     sudo \
  && apt-get autoremove --purge -y \
  && apt-get clean \

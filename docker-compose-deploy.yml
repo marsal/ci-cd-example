@@ -1,0 +1,88 @@
+version: '3.6'
+services:
+    mysql:
+        container_name: 'ci-cd-db'
+        image: mariadb:10.11
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ci-cd
+            MYSQL_ROOT_PASSWORD: docker
+            MYSQL_USER: ci-cd
+            MYSQL_PASSWORD: somepass
+        healthcheck:
+            test: ['CMD-SHELL', 'mysqladmin ping -h localhost -uroot -pdocker']
+            timeout: 45s
+            interval: 10s
+            retries: 5
+        ports:
+            - '127.0.0.1:3306:3306'
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - main
+
+    api:
+        restart: unless-stopped
+        container_name: ci-cd-backend
+        depends_on:
+            mysql:
+                condition: service_healthy
+        environment:
+            NODE_ENV: dev
+            NESTJS_PORT: 3000
+            DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd-db:3306/ci-cd'
+        image: marsalsans/ci-cd-backend:latest
+        networks:
+            - main
+        working_dir: /backend
+        command: npm run start
+        entrypoint: /bin/sh -c "npx prisma migrate reset --force && exec npm run start"
+        healthcheck:
+            test:
+                - CMD-SHELL
+                - |
+                    if curl -fs http://localhost:3000/api/isAlive; then \
+                      exit 0; \
+                    else \
+                      exit 1; \
+                    fi
+            timeout: 5s
+            interval: 10s
+            retries: 5
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+
+    front:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: Dockerfile # Asegúrate de que el Dockerfile está en la raíz del proyecto
+        container_name: ci-cd-frontend
+        depends_on:
+            api:
+                condition: service_healthy
+        networks:
+            - main
+        working_dir: /usr/share/nginx/html
+
+    nginx:
+        image: ci-cd-frontend # Utiliza la imagen construida en el servicio 'front'
+        container_name: ci-cd-nginx
+        restart: unless-stopped
+        depends_on:
+            front:
+                condition: service_started # Espera a que el servicio 'front' esté iniciado
+        ports:
+            - '127.0.0.1:8000:80'
+        networks:
+            - main
+        volumes:
+            - ./build/nginx/nginx.conf:/etc/nginx/conf.d/default.conf # Asegúrate de que la ruta es correcta
+
+networks:
+    main:
+        driver: bridge
+
+volumes:
+    db_data:
+        driver: local
