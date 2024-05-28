@@ -3,7 +3,7 @@ name: SSH Connection
 on:
     push:
         branches:
-            - main
+            - production
 
 jobs:
     connect-ssh:
