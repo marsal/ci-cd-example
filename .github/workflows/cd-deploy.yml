@@ -22,7 +22,7 @@ jobs:
 
             - name: Deploy to server
               run: |
-                  ssh -v -o StrictHostKeyChecking=no ip172-18-0-50-cpareaol2o900080qfr0@direct.labs.play-with-docker.com <<'ENDSSH'
+                  ssh -n -v -o StrictHostKeyChecking=no ip172-18-0-50-cpareaol2o900080qfr0@direct.labs.play-with-docker.com <<'ENDSSH'
                   cd ci-cd-example
                   docker-compose -f docker-compose-deploy.yml down
                   git pull
