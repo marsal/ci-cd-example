@@ -30,7 +30,7 @@ jobs:
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   port: '8022'
                   script: |
-                      cd /ci-cd-example
+                      cd ci-cd-example
                       docker-compose -f docker-compose-deploy.yml down
                       git pull
                       docker-compose -f docker-compose-deploy.yml up -d
