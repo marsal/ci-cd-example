@@ -68,7 +68,6 @@ services:
         working_dir: /usr/share/nginx/html
 
     nginx:
-        image: ci-cd-frontend
         container_name: ci-cd-nginx
         restart: unless-stopped
         depends_on:
