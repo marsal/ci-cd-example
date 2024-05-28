@@ -17,9 +17,7 @@ const fetchCounter = async (): Promise<Counter> => {
   return counter as Counter;
 };
 const fetchIncrease = async (counter: Counter): Promise<Counter> => {
-  const response = await fetch(
-    `/api/counter/${counter.id}/increase`,
-  );
+  const response = await fetch(`/api/counter/${counter.id}/increase`);
   if (!response.ok) {
     throw new Error('La solicitud no fue exitosa');
   }
@@ -28,9 +26,7 @@ const fetchIncrease = async (counter: Counter): Promise<Counter> => {
   return newCounter as Counter;
 };
 const fetchDecrease = async (counter: Counter): Promise<Counter> => {
-  const response = await fetch(
-    `/api/counter/${counter.id}/decrease`,
-  );
+  const response = await fetch(`/api/counter/${counter.id}/decrease`);
   if (!response.ok) {
     throw new Error('La solicitud no fue exitosa');
   }
@@ -69,7 +65,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React v1</h1>
       <div className="card">
         {!counter && <h3>Loading</h3>}
         {counter && (
