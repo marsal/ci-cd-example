@@ -19,11 +19,10 @@ jobs:
                   ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: SSH into server and execute commands
-            run: |
-              ssh -vvv -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedAlgorithms=+ssh-rsa -oStrictHostKeyChecking=no \
-              ip172-18-0-43-cpalubol2o9000dlcm70@direct.labs.play-with-docker.com \
-              'cd ci-cd-exaple && \
-              docker-compose -f docker-compose-deploy.yml down && \
-              git pull && \
-              docker-compose -f docker-compose-deploy.yml up -d'
-          
+              run: |
+                  ssh -vvv -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedAlgorithms=+ssh-rsa -oStrictHostKeyChecking=no \
+                  ip172-18-0-43-cpalubol2o9000dlcm70@direct.labs.play-with-docker.com \
+                  'cd ci-cd-example && \
+                  docker-compose -f docker-compose-deploy.yml down && \
+                  git pull && \
+                  docker-compose -f docker-compose-deploy.yml up -d'
