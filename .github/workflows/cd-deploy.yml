@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
     push:
         branches:
-            - main # Cambia esto al nombre de tu rama principal si es diferente
+            - production
 
 jobs:
     deploy:
