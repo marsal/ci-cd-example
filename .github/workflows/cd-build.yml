@@ -29,14 +29,3 @@ jobs:
                   docker compose -f docker-compose-ci.yml up -d
             - name: Wait for CI environment is healthy
               run: build/scripts/wait-for-ci.sh
-
-            - name: Log in to Docker Hub
-              run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-
-            - name: Push Docker image
-              run: |
-                  docker push marsalsans/ci-cd-backend
-
-            - name: Push Docker image
-              run: |
-                  docker push marsalsans/ci-cd-frontend

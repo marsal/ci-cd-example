@@ -38,7 +38,7 @@ services:
             - main
         working_dir: /backend
         command: npm run start
-        entrypoint: /bin/sh -c "npx prisma migrate reset --force && exec npm run start"
+        entrypoint: /bin/sh -c "npx prisma migrate deploy && exec npm run start"
         healthcheck:
             test:
                 - CMD-SHELL
