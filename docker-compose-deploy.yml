@@ -31,7 +31,9 @@ services:
             NODE_ENV: dev
             NESTJS_PORT: 3000
             DATABASE_URL: 'mysql://ci-cd:somepass@ci-cd-db:3306/ci-cd'
-        image: marsalsans/ci-cd-backend:latest
+        build:
+            context: . # Asegúrate de que el Dockerfile está en la raíz del proyecto
+            dockerfile: build/backend.Dockerfile
         networks:
             - main
         working_dir: /backend
@@ -55,8 +57,8 @@ services:
     front:
         restart: unless-stopped
         build:
-            context: .
-            dockerfile: Dockerfile # Asegúrate de que el Dockerfile está en la raíz del proyecto
+            context: . # Asegúrate de que el Dockerfile está en la raíz del proyecto
+            dockerfile: build/frontend.Dockerfile
         container_name: ci-cd-frontend
         depends_on:
             api:
@@ -66,7 +68,9 @@ services:
         working_dir: /usr/share/nginx/html
 
     nginx:
-        image: ci-cd-frontend # Utiliza la imagen construida en el servicio 'front'
+        build:
+            context: . # Usa el Dockerfile que está en la raíz del proyecto
+            dockerfile: Dockerfile.nginx # Asumiendo que tienes un Dockerfile.nginx para nginx
         container_name: ci-cd-nginx
         restart: unless-stopped
         depends_on:
@@ -77,7 +81,7 @@ services:
         networks:
             - main
         volumes:
-            - ./build/nginx/nginx.conf:/etc/nginx/conf.d/default.conf # Asegúrate de que la ruta es correcta
+            - ./build/nginx/nginx.conf:/etc/nginx/conf.d/default.conf # Mapea tu archivo nginx.conf al contenedor
 
 networks:
     main:
