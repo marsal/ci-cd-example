@@ -20,4 +20,6 @@ jobs:
 
             - name: SSH into server and execute commands
               run: |
-                  ssh -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedAlgorithms=+ssh-rsa -oStrictHostKeyChecking=no ip172-18-0-43-cpalubol2o9000dlcm70@direct.labs.play-with-docker.com 'cd ci-cd-test && docker-compose -f docker-compose-deploy.yml down && git pull && docker-compose -f docker-compose-deploy.yml up -d'
+                  ssh -vvv -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedAlgorithms=+ssh-rsa -oStrictHostKeyChecking=no \
+                  ip172-18-0-43-cpalubol2o9000dlcm70@direct.labs.play-with-docker.com \
+                  'cd ci-cd-test && docker-compose -f docker-compose-deploy.yml down && git pull && docker-compose -f docker-compose-deploy.yml up -d'
