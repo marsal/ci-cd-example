@@ -22,4 +22,4 @@ jobs:
 
             - name: Deploy to server
               run: |
-                  ssh -vvv ip172-18-0-50-cpareaol2o900080qfr0@direct.labs.play-with-docker.com "bash /root/ci-cd-example/build/scripts/deploy.sh"
+                  ssh -v ip172-18-0-50-cpareaol2o900080qfr0@direct.labs.play-with-docker.com "bash /root/ci-cd-example/build/scripts/deploy.sh"
